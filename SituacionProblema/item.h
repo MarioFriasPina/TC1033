@@ -6,7 +6,7 @@ class Item
 {
 protected:
 	double		pPrice;
-	int			pQuantity = 5;
+	int			pQuantity;
 	std::string	pName;
 	std::string pBrand;
 
@@ -15,6 +15,7 @@ public:
 	std::string	getName();
 	int			getQuantity();
 	std::string getBrand();
+
 	bool		sellOne();
 
 };
@@ -29,7 +30,7 @@ private:
 
 public:
 	Monitor();
-	Monitor(double price, std::string name, std::string brand, int width, int height, int xres, int yres);
+	Monitor(int quantity, double price, std::string name, std::string brand, int width, int height, int xres, int yres);
 	int		getWidth();
 	int		getHeight();
 	int		getXResolution();
@@ -44,7 +45,7 @@ class CPU : public Item
 
 public:
 	CPU();
-	CPU(double price, std::string name, std::string brand, float speed, int cores, int threads);
+	CPU(int quantity, double price, std::string name, std::string brand, float speed, int cores, int threads);
 	float	getClockSpeed();
 	int		getCores();
 	int		getThreads();
@@ -59,7 +60,7 @@ private:
 
 public:
 	GPU();
-	GPU(double price, std::string name, std::string brand, float speed, int ram, int bus);
+	GPU(int quantity, double price, std::string name, std::string brand, float speed, int ram, int bus);
 	int		getGraphicRAM();
 	int		getBusMemory();
 	float	getClockSpeed();
@@ -73,7 +74,7 @@ private:
 
 public:
 	HDD();
-	HDD(double price, std::string name, std::string brand, int size, int speed);
+	HDD(int quantity, double price, std::string name, std::string brand, int size, int speed);
 	int		getCapacity();
 	int		getSpeed();
 };
@@ -86,7 +87,7 @@ private:
 
 public:
 	SSD();
-	SSD(double price, std::string name, std::string brand, int size, int speed);
+	SSD(int quantity, double price, std::string name, std::string brand, int size, int speed);
 	int		getCapacity();
 	int		getSpeed();
 };
@@ -99,7 +100,7 @@ private:
 
 public:
 	RAM();
-	RAM(double price, std::string name, std::string brand, int size, int speed);
+	RAM(int quantity, double price, std::string name, std::string brand, int size, int speed);
 	int		getSize();
 	int		getSpeed();
 };
@@ -111,7 +112,7 @@ private:
 
 public:
 	Motherboard();
-	Motherboard(double price, std::string name, std::string brand, int slots);
+	Motherboard(int quantity, double price, std::string name, std::string brand, int slots);
 	int		getSlots();
 };
 
@@ -123,7 +124,7 @@ private:
 
 public:
 	Power();
-	Power(double price, std::string name, std::string brand, int watts, int fan);
+	Power(int quantity, double price, std::string name, std::string brand, int watts, int fan);
 	int		getWatts();
 	int		getFanSize();
 };
@@ -137,7 +138,7 @@ private:
 
 public:
 	Keyboard();
-	Keyboard(double price, std::string name, std::string brand, bool bluetooth, bool mechanical, int keys);
+	Keyboard(int quantity, double price, std::string name, std::string brand, bool bluetooth, bool mechanical, int keys);
 	int		getKeys();
 	bool	getBluetooth();
 	bool	getMechanical();
@@ -151,7 +152,7 @@ private:
 
 public:
 	Mouse();
-	Mouse(double price, std::string name, std::string brand, bool bluetooth, int buttons);
+	Mouse(int quantity, double price, std::string name, std::string brand, bool bluetooth, int buttons);
 	int		getButtons();
 	bool	getBluetooth();
 };

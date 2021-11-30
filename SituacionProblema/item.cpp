@@ -32,6 +32,7 @@ bool	Item::sellOne()
 
 Monitor::Monitor()
 {
+	pQuantity = 5;
 	pPrice = 0.0;
 	pName = "";
 	pBrand = "";
@@ -41,8 +42,9 @@ Monitor::Monitor()
 	pYResolution = 0;
 }
 
-Monitor::Monitor(double price, std::string name, std::string brand, int width, int height, int xres, int yres)
+Monitor::Monitor(int quantity, double price, std::string name, std::string brand, int width, int height, int xres, int yres)
 {
+	pQuantity = quantity;
 	pPrice = price;
 	pName = name;
 	pBrand = brand;
@@ -74,6 +76,7 @@ int Monitor::getYResolution()
 
 CPU::CPU()
 {
+	pQuantity = 5;
 	pPrice = 0.0;
 	pName = "";
 	pBrand = "";
@@ -82,8 +85,9 @@ CPU::CPU()
 	pThreads = 0;
 }
 
-CPU::CPU(double price, std::string name, std::string brand, float speed, int cores, int threads)
+CPU::CPU(int quantity, double price, std::string name, std::string brand, float speed, int cores, int threads)
 {
+	pQuantity = quantity;
 	pPrice = price;
 	pName = name;
 	pBrand = brand;
@@ -107,8 +111,20 @@ int CPU::getThreads()
 	return pThreads;
 }
 
-GPU::GPU(double price, std::string name, std::string brand, float speed, int ram, int bus)
+GPU::GPU()
 {
+	pQuantity = 0;
+	pPrice = 0.0;
+	pName = "";
+	pBrand = "";
+	pClockSpeed = 0.0;
+	pBusMemory = 0;
+	pGraphicRAM = 0;
+}
+
+GPU::GPU(int quantity, double price, std::string name, std::string brand, float speed, int ram, int bus)
+{
+	pQuantity = quantity;
 	pPrice = price;
 	pName = name;
 	pBrand = brand;
@@ -132,13 +148,24 @@ int GPU::getGraphicRAM()
 	return pGraphicRAM;
 }
 
-HDD::HDD(double price, std::string name, std::string brand, int size, int speed)
+HDD::HDD()
 {
+	pQuantity = 0;
+	pPrice = 0.0;
+	pName = "";
+	pBrand = "";
+	pCapacity = 0;
+	pSpeed = 0;
+}
+
+HDD::HDD(int quantity, double price, std::string name, std::string brand, int size, int speed)
+{
+	pQuantity = quantity;
 	pPrice = price;
 	pName = name;
 	pBrand = brand;
 	pCapacity = size;
-	pSpeed - speed;
+	pSpeed = speed;
 }
 
 int HDD::getSpeed()
@@ -151,13 +178,24 @@ int HDD::getCapacity()
 	return pCapacity;
 }
 
-SSD::SSD(double price, std::string name, std::string brand, int size, int speed)
+SSD::SSD()
 {
+	pQuantity = 0;
+	pPrice = 0.0;
+	pName = "";
+	pBrand = "";
+	pCapacity = 0;
+	pSpeed = 0;
+}
+
+SSD::SSD(int quantity, double price, std::string name, std::string brand, int size, int speed)
+{
+	pQuantity = quantity;
 	pPrice = price;
 	pName = name;
 	pBrand = brand;
 	pCapacity = size;
-	pSpeed - speed;
+	pSpeed = speed;
 }
 
 int SSD::getSpeed()
@@ -170,13 +208,24 @@ int SSD::getCapacity()
 	return pCapacity;
 }
 
-RAM::RAM(double price, std::string name, std::string brand, int size, int speed)
+RAM::RAM()
 {
+	pQuantity = 0;
+	pPrice = 0.0;
+	pName = "";
+	pBrand = "";
+	pSize = 0;
+	pSpeed = 0;
+}
+
+RAM::RAM(int quantity, double price, std::string name, std::string brand, int size, int speed)
+{
+	pQuantity = quantity;
 	pPrice = price;
 	pName = name;
 	pBrand = brand;
 	pSize = size;
-	pSpeed - speed;
+	pSpeed = speed;
 }
 
 int RAM::getSpeed()
@@ -189,8 +238,18 @@ int RAM::getSize()
 	return pSize;
 }
 
-Motherboard::Motherboard(double price, std::string name, std::string brand, int slots)
+Motherboard::Motherboard()
 {
+	pQuantity = 0;
+	pPrice = 0.0;
+	pName = "";
+	pBrand = "";
+	pSlots = 0;
+}
+
+Motherboard::Motherboard(int quantity, double price, std::string name, std::string brand, int slots)
+{
+	pQuantity = quantity;
 	pPrice = price;
 	pName = name;
 	pBrand = brand;
@@ -202,8 +261,19 @@ int Motherboard::getSlots()
 	return pSlots;
 }
 
-Power::Power(double price, std::string name, std::string brand, int power, int fan)
+Power::Power()
 {
+	pQuantity = 0;
+	pPrice = 0.0;
+	pName = "";
+	pBrand = "";
+	pWatts = 0;
+	pFanSize = 0;
+}
+
+Power::Power(int quantity, double price, std::string name, std::string brand, int power, int fan)
+{
+	pQuantity = quantity;
 	pPrice = price;
 	pName = name;
 	pBrand = brand;
@@ -221,8 +291,19 @@ int		Power::getFanSize()
 	return pFanSize;
 }
 
-Keyboard::Keyboard(double price, std::string name, std::string brand, bool bluetooth, bool mechanical, int keys)
+Keyboard::Keyboard()
 {
+	pQuantity = 0;
+	pPrice = 0.0;
+	pName = "";
+	pBrand = "";
+	pBluetooth = 0;
+	pKeys = 0;
+}
+
+Keyboard::Keyboard(int quantity, double price, std::string name, std::string brand, bool bluetooth, bool mechanical, int keys)
+{
+	pQuantity = quantity;
 	pPrice = price;
 	pName = name;
 	pBrand = brand;
@@ -245,8 +326,19 @@ bool	Keyboard::getMechanical()
 	return pMech;
 }
 
-Mouse::Mouse(double price, std::string name, std::string brand, bool bluetooth, int buttons)
+Mouse::Mouse()
 {
+	pQuantity = 0;
+	pPrice = 0.0;
+	pName = "";
+	pBrand = "";
+	pBluetooth = false;
+	pButtons = 0;
+}
+
+Mouse::Mouse(int quantity, double price, std::string name, std::string brand, bool bluetooth, int buttons)
+{
+	pQuantity = quantity;
 	pPrice = price;
 	pName = name;
 	pBrand = brand;
@@ -262,23 +354,4 @@ int		Mouse::getButtons()
 bool	Mouse::getBluetooth()
 {
 	return pBluetooth;
-}
-
-int main()
-{
-	Monitor	mon(2399.99, "LG G1 65", "LG", 56, 32, 3840, 2160);
-	CPU		cpu(1249.99, "Test", "ASUS", 3.1, 8, 12);
-	GPU		gpu(1999.99, "RTX 2070", "nvidia", 3.1, 16, 12);
-	HDD		mem(999.99, "Memoria", "samsung", 2048, 12);
-	SSD		solida(2000.0, "Solid", "crucial", 1024, 10);
-	RAM		ram(1000.0, "pirate", "logitech", 8, 12);
-	Motherboard	mb(899.99, "isf", "logitech", 4);
-	Power	pow(1200.0, "bfab", "fnsk", 311, 120);
-	Mouse	ms(300.0, "G305", "logitech", true, 5);
-	Keyboard	kb(700.0, "pricer", "razor", false, true, 104);
-
-	std::cout << mon.getName() << "\t" << mon.getPrice() << std::endl;
-	std::cout << cpu.getName() << "\t" << cpu.getPrice() << std::endl;
-
-	return 0;
 }
