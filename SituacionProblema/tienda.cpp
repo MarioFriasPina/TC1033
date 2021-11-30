@@ -9,9 +9,11 @@ int main()
 	Monitor	mon2(5, 2399.99, "LG G2 65", "LG", 56, 32, 3840, 2160);
 	tienda.nuevoMonitor(&mon2);
 
-	tienda.venderProducto("LG G2 65");
+	tienda.venderProducto("pricer");
 
 	tienda.listarInfo();
+	tienda.listarClientes();
+	tienda.totalVendido();
 
 	return 0;
 }
@@ -19,6 +21,11 @@ int main()
 Tienda::Tienda()
 {
 	pVendido = 0;
+
+	sizeClientes = 0;
+	Cliente	cli(sizeClientes, "Mario");
+	nuevoCliente(&cli);
+	clienteActual = 0;
 
 	sizeMonitor = 0;
 	Monitor	 mon(5, 2399.99, "LG G1 65", "LG", 56, 32, 3840, 2160);
@@ -52,7 +59,7 @@ Tienda::Tienda()
 	nuevoKeyboard(&kb);
 }
 
-void Tienda::listarInfo()
+void	Tienda::listarInfo()
 {
 	printf("%-15s%-25s%-s\n", "Tipo", "Nombre", "Disponibles");
 	for (size_t i = 0; i < sizeMonitor; i++)
@@ -86,6 +93,18 @@ void Tienda::listarInfo()
 		printf("%-15s%-25s%-d\n", "Mouse", listaMouse[i].getName().c_str(), listaMouse[i].getQuantity());
 }
 
+void	Tienda::totalVendido()
+{
+	printf("Total Vendido= $%.2f\n", pVendido);
+}
+
+void	Tienda::listarClientes()
+{
+	printf("%-5s%-25s%-s\n", "Id", "Cliente", "Pagado");
+	for (size_t i = 0; i < sizeClientes; i++)
+		printf("%-5d%-25s%-f\n", listaClientes[i].getID(), listaClientes[i].getName().c_str(), listaClientes[i].getPagado());
+}
+
 void	Tienda::venderProducto(const char *nombre)
 {
 	Item* producto;
@@ -95,6 +114,7 @@ void	Tienda::venderProducto(const char *nombre)
 	else if (producto->sellOne())
 	{
 		pVendido += producto->getPrice();
+		listaClientes[clienteActual].pagarProducto(producto->getPrice());
 	}
 	else
 		printf("No existen suficientes existencias para su producto\n");
@@ -105,34 +125,61 @@ Item*	Tienda::buscarProducto(const char *nombre)
 	for (size_t i = 0; i < sizeMonitor; i++)
 		if (listaMonitor[i].getName().compare(nombre) == 0)
 			return &listaMonitor[i];
-	return NULL;
 
 	for (size_t i = 0; i < sizeCPU; i++)
-		printf("%-15s%-25s%-d\n", "CPU", listaCPU[i].getName().c_str(), listaCPU[i].getQuantity());
+		if (listaCPU[i].getName().compare(nombre) == 0)
+			return &listaCPU[i];
 
 	for (size_t i = 0; i < sizeGPU; i++)
-		printf("%-15s%-25s%-d\n", "GPU", listaGPU[i].getName().c_str(), listaGPU[i].getQuantity());
+		if (listaGPU[i].getName().compare(nombre) == 0)
+			return &listaGPU[i];
 
 	for (size_t i = 0; i < sizeHDD; i++)
-		printf("%-15s%-25s%-d\n", "HDD", listaHDD[i].getName().c_str(), listaHDD[i].getQuantity());
+		if (listaHDD[i].getName().compare(nombre) == 0)
+			return &listaHDD[i];
 
 	for (size_t i = 0; i < sizeSSD; i++)
-		printf("%-15s%-25s%-d\n", "SSD", listaSSD[i].getName().c_str(), listaSSD[i].getQuantity());
+		if (listaSSD[i].getName().compare(nombre) == 0)
+			return &listaSSD[i];
 
 	for (size_t i = 0; i < sizeRAM; i++)
-		printf("%-15s%-25s%-d\n", "RAM", listaRAM[i].getName().c_str(), listaRAM[i].getQuantity());
+		if (listaRAM[i].getName().compare(nombre) == 0)
+			return &listaRAM[i];
 
 	for (size_t i = 0; i < sizeMotherboard; i++)
-		printf("%-15s%-25s%-d\n", "Motherboard", listaMotherboard[i].getName().c_str(), listaMotherboard[i].getQuantity());
+		if (listaMotherboard[i].getName().compare(nombre) == 0)
+			return &listaMotherboard[i];
 
 	for (size_t i = 0; i < sizePower; i++)
-		printf("%-15s%-25s%-d\n", "Power", listaPower[i].getName().c_str(), listaPower[i].getQuantity());
+		if (listaPower[i].getName().compare(nombre) == 0)
+			return &listaPower[i];
 
 	for (size_t i = 0; i < sizeKeyboard; i++)
-		printf("%-15s%-25s%-d\n", "Keyboard", listaKeyboard[i].getName().c_str(), listaKeyboard[i].getQuantity());
+		if (listaKeyboard[i].getName().compare(nombre) == 0)
+			return &listaKeyboard[i];
 
 	for (size_t i = 0; i < sizeMouse; i++)
-		printf("%-15s%-25s%-d\n", "Mouse", listaMouse[i].getName().c_str(), listaMouse[i].getQuantity());
+		if (listaMouse[i].getName().compare(nombre) == 0)
+			return &listaMouse[i];
+
+	return NULL;
+}
+
+void	Tienda::nuevoCliente(Cliente* cliente)
+{
+	Cliente* copia;
+
+	copia = new Cliente[++sizeClientes];
+	if (sizeClientes > 1)
+	{
+		for (size_t i = 0; i < sizeClientes - 1; i++)
+		{
+			copia[i] = listaClientes[i];
+		}
+		delete[] listaClientes;
+	}
+	copia[sizeClientes - 1] = *cliente;
+	listaClientes = copia;
 }
 
 void	Tienda::nuevoMonitor(Monitor *producto)
@@ -290,4 +337,6 @@ Tienda::~Tienda()
 	delete[] listaPower;
 	delete[] listaKeyboard;
 	delete[] listaMouse;
+
+	delete[] listaClientes;
 }

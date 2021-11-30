@@ -1,13 +1,19 @@
 #pragma once
 #include "item.h"
+#include "cliente.h"
 
 class Tienda
 {
 private:
 
-	int			pVendido;
+	double		pVendido;
+
 
 	//Todas las listas y sus tamanos
+	int			sizeClientes;
+	int			clienteActual;
+	Cliente*	listaClientes;
+	
 	int			sizeMonitor;
 	Monitor*	listaMonitor;
 	int			sizeGPU;
@@ -36,12 +42,17 @@ public:
 	~Tienda();
 	//Imprime todos los productos de la tienda, su tipo y su cantidad
 	void	listarInfo();
+	void	totalVendido();
+	void	listarClientes();
 
 	void	venderProducto(const char *nombreProducto);
-
 	Item*	buscarProducto(const char *nombre);
 
+	//Metodos de clientes
+	void	nuevoCliente(Cliente* cliente);
+
 	//Agrega un producto de algun tipo
+
 	void	nuevoMonitor(Monitor *producto);
 	void	nuevoGPU(GPU *producto);
 	void	nuevoCPU(CPU *producto);
