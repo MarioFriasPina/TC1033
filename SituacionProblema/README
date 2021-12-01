@@ -1,0 +1,5 @@
+To Compile:
+g++ tienda.cpp item.cpp cliente.cpp -o tienda
+
+To Run:
+./tienda
