@@ -9,7 +9,12 @@ int main()
 	Monitor	mon2(5, 2399.99, "LG G2 65", "LG", 56, 32, 3840, 2160);
 	tienda.nuevoMonitor(&mon2);
 
-	tienda.venderProducto("pricer");
+	tienda.venderProducto("RTX 2070", "Mario");
+
+	Cliente	cli("Pedro");
+	tienda.nuevoCliente(&cli);
+
+	tienda.venderProducto("LG G2 65", "Pedro");
 
 	tienda.listarInfo();
 	tienda.listarClientes();
@@ -23,7 +28,7 @@ Tienda::Tienda()
 	pVendido = 0;
 
 	sizeClientes = 0;
-	Cliente	cli(sizeClientes, "Mario");
+	Cliente	cli("Mario");
 	nuevoCliente(&cli);
 	clienteActual = 0;
 
@@ -102,22 +107,35 @@ void	Tienda::listarClientes()
 {
 	printf("%-5s%-25s%-s\n", "Id", "Cliente", "Pagado");
 	for (size_t i = 0; i < sizeClientes; i++)
-		printf("%-5d%-25s%-f\n", listaClientes[i].getID(), listaClientes[i].getName().c_str(), listaClientes[i].getPagado());
+		printf("%-5d%-25s%-.2f\n", listaClientes[i].getID(), listaClientes[i].getName().c_str(), listaClientes[i].getPagado());
 }
 
-void	Tienda::venderProducto(const char *nombre)
+void	Tienda::venderProducto(const char* nombreProducto, const char* nombreCliente)
 {
-	Item* producto;
-	producto = buscarProducto(nombre);
+	Item*	producto;
+	int		numCliente;
+
+	producto = buscarProducto(nombreProducto);
+	numCliente = buscarCliente(nombreCliente);
 	if (producto == NULL)
 		printf("El producto no se encuentra en el catalogo\n");
+	else if (numCliente == -1)
+		printf("El cliente no se encuentra en la lista\n");
 	else if (producto->sellOne())
 	{
 		pVendido += producto->getPrice();
-		listaClientes[clienteActual].pagarProducto(producto->getPrice());
+		listaClientes[numCliente].pagarProducto(producto->getPrice());
 	}
 	else
 		printf("No existen suficientes existencias para su producto\n");
+}
+
+int		Tienda::buscarCliente(const char* nombre)
+{
+	for (size_t i = 0; i < sizeClientes; i++)
+		if (listaClientes[i].getName().compare(nombre) == 0)
+			return i;
+	return -1;
 }
 
 Item*	Tienda::buscarProducto(const char *nombre)
@@ -180,6 +198,7 @@ void	Tienda::nuevoCliente(Cliente* cliente)
 	}
 	copia[sizeClientes - 1] = *cliente;
 	listaClientes = copia;
+	listaClientes[sizeClientes - 1].setID(sizeClientes);
 }
 
 void	Tienda::nuevoMonitor(Monitor *producto)

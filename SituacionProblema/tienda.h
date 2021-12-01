@@ -45,7 +45,8 @@ public:
 	void	totalVendido();
 	void	listarClientes();
 
-	void	venderProducto(const char *nombreProducto);
+	void	venderProducto(const char *nombreProducto, const char *nombreCliente);
+	int		buscarCliente(const char* nombre);
 	Item*	buscarProducto(const char *nombre);
 
 	//Metodos de clientes

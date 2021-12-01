@@ -10,9 +10,10 @@ private:
 
 public:
 	Cliente();
-	Cliente(int id, std::string name);
+	Cliente(std::string name);
 	void pagarProducto(double precio);
 	std::string	getName();
 	int			getID();
 	double		getPagado();
+	void		setID(int id);
 };

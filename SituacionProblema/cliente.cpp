@@ -7,9 +7,9 @@ Cliente::Cliente()
 	pPagado = 0;
 }
 
-Cliente::Cliente(int id, std::string name)
+Cliente::Cliente(std::string name)
 {
-	pID = id;
+	pID = 0;
 	pNombre = name;
 	pPagado = 0;
 }
@@ -32,4 +32,9 @@ int			Cliente::getID()
 double		Cliente::getPagado()
 {
 	return pPagado;
+}
+
+void		Cliente::setID(int id)
+{
+	pID = id;
 }
